@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../db/index');
 const jwtTokens = require('../utils/jwt-helpers')
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/', async function(req, res, next) {
 
   try{
     const users =  await db.any('SELECT * FROM useraccount');
@@ -20,21 +20,22 @@ router.get('/', async (req, res, next) => {
   
 });
 
-router.post('/login', async(req, res) => {
+router.post('/login', async (req, res) => {
   try {
     let {username, password} = req.body;
     
-    const user = await db.one('SELECT * FROM users WHERE username=$1', [username]);
-        
+    const user = await db.one('SELECT * FROM useraccount WHERE username = $1', [username]);
+        console.log(user.username, user.password)
     if(!user){
       res.status(401).send({error: "username is not correct"});
+      console.log("username is not correct")
       return;
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
     if(!validPassword){
-      res.status(401).send({error: "Invalid password."})
+      res.status(401).send({status: 'error', message: "Invalid password for this user."})
       return;
     }
 
@@ -60,6 +61,9 @@ router.post('/', async (req, res) => {
     if(username.length < 4){
       throw({message: 'Username must have at least 4 characters'});
     }
+    if(password.length < 6){
+      throw({message: 'Username must have at least 6 characters'});
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const emailToLowerCase = email.toLowerCase();
    
@@ -71,16 +75,30 @@ router.post('/', async (req, res) => {
     if(user){
 
       let data = jwtTokens(user);
-      res.json(data)
       console.log(data)
+      res.json(data)
+      
     }
     
      
   } catch (error) {
+    console.log(error)
     res.send({
       status: 404,
       message: error.message
     })
+  }
+
+})
+
+router.get('/authenticate', async (req, res) => {
+  try {
+   console.log(req.headers);
+
+    console.log(accessToken);
+    res.send({});
+  } catch (error){
+    res.send( 'error')
   }
 })
 

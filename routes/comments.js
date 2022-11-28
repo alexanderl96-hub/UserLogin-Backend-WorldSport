@@ -20,10 +20,10 @@ router.get('/', async function(req, res, next) {
 
 router.post('/', async (req, res) => {
   try {
-    const {userId, userName, userImage, comment} = req.body;
+    const {username, userimage, comment, memberid, date} = req.body;
 
-    const userComment = await db.one(`INSERT INTO comments ( userId, userName, userImage, comment) VALUES 
-    ($1, $2, $3, $4) RETURNING *`, [userId, userName, userImage, comment]);
+    const userComment = await db.one(`INSERT INTO comments ( username, userimage, comment, memberid, date) VALUES 
+    ($1, $2, $3, $4, $5) RETURNING *`, [username, userimage, comment, memberid, date]);
 
      res.json({userComment: userComment})
      

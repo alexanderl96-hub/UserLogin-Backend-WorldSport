@@ -8,4 +8,4 @@ function jwtTokens({id, username, email}){
     return ({accessToken, refreshToken});
 
 }
-module.export = jwtTokens;
+module.exports = jwtTokens;

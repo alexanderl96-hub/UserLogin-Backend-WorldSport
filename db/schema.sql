@@ -6,7 +6,7 @@ CREATE DATABASE usersbackend;
 CREATE TABLE useraccount (
     id SERIAL PRIMARY KEY,
     username text NOT NULL UNIQUE,
-    email text  NOT NULL,
+    email text  NOT NULL UNIQUE,
     image text,
     password text  NOT NULL
 );
@@ -14,15 +14,16 @@ CREATE TABLE useraccount (
 CREATE TABLE administer (
     id SERIAL PRIMARY KEY,
     username text NOT NULL UNIQUE,
-    email text  NOT NULL,
+    email text  NOT NULL UNIQUE,
     image text,
     password text  NOT NULL
 );
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    userId text,
-    userName text,
-    userImage text,
-    comment text
+    username text,
+    userimage text,
+    comment text,
+    memberid text,
+    date text
 );
