@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
     if(user){
 
       let data = jwtTokens(user);
-      console.log(data)
+      console.log(data.username)
       res.json(data)
       
     }
