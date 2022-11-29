@@ -20,6 +20,18 @@ router.get('/', async function(req, res, next) {
   
 });
 
+router.get('/:id', async function(req, res, next){
+  try{
+     const user = await db.one("SELECT * FROM useraccount WHERE id = $1",[req.params.id]);
+     res.json(user)
+  }catch(error){
+    res.send({
+      status: 404,
+      message: error.message
+    })
+  }
+});
+
 router.post('/login', async (req, res) => {
   try {
     let {username, password} = req.body;
@@ -41,7 +53,7 @@ router.post('/login', async (req, res) => {
 
     if(user && validPassword){
       let data = jwtTokens(user);
-
+      data.user = user
       res.json(data);
     }
 
@@ -75,9 +87,10 @@ router.post('/', async (req, res) => {
     if(user){
 
       let data = jwtTokens(user);
-      console.log(data.username)
+      console.log(user)
+      data.user = user
+    
       res.json(data)
-      
     }
     
      
