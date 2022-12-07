@@ -104,6 +104,24 @@ router.post('/', async (req, res) => {
 
 })
 
+
+
+router.put('/:id', async (req, res)=>{
+  try{
+    // get req.params.id first in order to update the id
+    const userId = req.params.id;
+    // do not pass password as part of the req.body
+    const { username, email, image} = req.body;
+      // do not pass password as part of the in await db.one
+    const user = await db.one(`UPDATE useraccount SET username = $1, email = $2, image = $3 WHERE id = $4 RETURNING *`,
+    [username, email, image, userId])
+     res.json(user);
+
+  }catch(error){
+    res.send( 'error')
+  }
+})
+
 router.get('/authenticate', async (req, res) => {
   try {
    console.log(req.headers);
