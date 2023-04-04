@@ -1,6 +1,6 @@
 const pgp = require("pg-promise")();
 
-const databaseUrl = 'postgres://postgres:123456@127.0.0.1:5432/usersbackend';
+const databaseUrl = process.env.DATABASE_URL || 'postgres://postgres:123456@127.0.0.1:5432/usersbackend';
 
 const cn = {
     connectionString: databaseUrl,
