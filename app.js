@@ -19,9 +19,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(cors());
 
-// if(process.env.NODE_ENV !== 'production'){
-//   require('dotenv').config();
-// }
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
