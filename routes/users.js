@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
    
 
     const user = await db.one(`INSERT INTO useraccount ( username, email, image, password) VALUES 
-    ($1, $2, $3, $4) RETURNING id, username, email, image`, [username, emailToLowerCase, image, hashedPassword]);
+    ($1, $2, $3, $4) RETURNING id, username, email, image`, [username, email, image, hashedPassword]);
 
 
     if(user){
