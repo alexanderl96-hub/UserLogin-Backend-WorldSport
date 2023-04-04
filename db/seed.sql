@@ -1,4 +1,4 @@
-\c usersbackend;
+-- \c usersbackend;
 INSERT INTO useraccount (username, email, image, password) VALUES 
 ('Robert La Rosa', 'alexayarini@gmail.com' , null, '12345678');
 

@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS usersbackend;
+-- DROP DATABASE IF EXISTS usersbackend;
 
-CREATE DATABASE usersbackend;
+-- CREATE DATABASE usersbackend;
 
-\c usersbackend;
+
 CREATE TABLE useraccount (
     id SERIAL PRIMARY KEY,
     username text NOT NULL UNIQUE,
