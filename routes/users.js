@@ -77,7 +77,7 @@ router.post('/', async (req, res) => {
       throw({message: 'Username must have at least 6 characters'});
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const emailToLowerCase = email.toLowerCase();
+    // const emailToLowerCase = email.toLowerCase();
    
 
     const user = await db.one(`INSERT INTO useraccount ( username, email, image, password) VALUES 
