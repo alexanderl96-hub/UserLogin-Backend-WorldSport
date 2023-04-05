@@ -33,6 +33,7 @@ router.get('/:id', async function(req, res, next){
 });
 
 router.post('/login', async (req, res) => {
+  console.log('hello from login')
   try {
     let {username, password} = req.body;
     
