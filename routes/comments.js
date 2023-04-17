@@ -51,6 +51,9 @@ router.delete('/:id', async function(req, res, next){
   try{
      const user = await db.one("DELETE  FROM comments WHERE id = $1",[req.params.id]);
      res.json(user)
+     res.send({
+      status: 'Success', message: 'Item ID has been deleted successfully'
+    })
   }catch(error){
     res.send({
       status: 404,
