@@ -18,6 +18,18 @@ router.get('/', async function(req, res, next) {
       
 });
 
+router.get('/:id', async function(req, res, next){
+  try{
+     const user = await db.one("SELECT * FROM comments WHERE id = $1",[req.params.id]);
+     res.json(user)
+  }catch(error){
+    res.send({
+      status: 404,
+      message: error.message
+    })
+  }
+});
+
 router.post('/', async (req, res) => {
   try {
     const {username, userimage, comment, memberid, date} = req.body;
@@ -34,5 +46,18 @@ router.post('/', async (req, res) => {
     })
   }
 })
+
+router.delete('/:id', async function(req, res, next){
+  try{
+     const user = await db.one("SELECT * FROM comments WHERE id = $1",[req.params.id]);
+     res.json(user)
+  }catch(error){
+    res.send({
+      status: 404,
+      message: error.message
+    })
+  }
+});
+
 
 module.exports = router;
