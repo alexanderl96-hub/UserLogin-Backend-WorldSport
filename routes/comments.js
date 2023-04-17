@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async function(req, res, next){
   try{
-     const user = await db.one("DELETE * FROM comments WHERE id = $1",[req.params.id]);
+     const user = await db.one("SELECT * FROM comments WHERE id = $1",[req.params.id]);
      res.json(user)
   }catch(error){
     res.send({
